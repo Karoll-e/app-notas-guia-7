@@ -2,15 +2,27 @@ import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import { Link } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
+import { validateEmail } from "../utils/helpers";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useSate(null);
+  const [error, setError] = useState(null);
 
-  const handleLogin = async (e)=>{
+  const handleLogin = async (e) => {
     e.preventDefault();
-  }
+
+    if (!validateEmail(email)) {
+      setError("Por vavor ingrese un email valido");
+      return;
+    }
+    if (!password) {
+      setError("Por favor ingresa la constraseña");
+      return
+    }
+
+    setError("");
+  };
 
   return (
     <>
@@ -29,8 +41,10 @@ function Login() {
 
             <PasswordInput
               value={password}
-              onChange={(e) => setPassword(e.taget.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
+
+            {error && <p className="text-red-500 text-xs pb-1 ">{error}</p>}
 
             <button type="submit" className="btn-primary">
               Login
