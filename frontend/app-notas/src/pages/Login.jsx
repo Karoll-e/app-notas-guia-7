@@ -13,12 +13,12 @@ function Login() {
     e.preventDefault();
 
     if (!validateEmail(email)) {
-      setError("Por vavor ingrese un email valido");
+      setError("Por vavor ingresa un email valido");
       return;
     }
     if (!password) {
       setError("Por favor ingresa la constraseña");
-      return
+      return;
     }
 
     setError("");
@@ -47,12 +47,12 @@ function Login() {
             {error && <p className="text-red-500 text-xs pb-1 ">{error}</p>}
 
             <button type="submit" className="btn-primary">
-              Login
+              Iniciar sesion
             </button>
             <p className="text-sm text-center mt-4">
-              Not registered yet?{" "}
+              ¿Aún no estás registrado?{" "}
               <Link to="/signup" className="font-medium text-primary underline">
-                Create account
+                Crea una cuenta
               </Link>
             </p>
           </form>
