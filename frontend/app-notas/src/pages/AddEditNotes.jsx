@@ -8,6 +8,9 @@ const AddEditNotes = ({ onClose }) => {
   const [tags, setTags] = useState([]);
   const [error, setError] = useState(null);
 
+  const editNote = async () => {};
+  const addNewNote = async () => {};
+
   const handleAddNote = () => {
     if (!title) {
       setError("Por favor introduce un título");
@@ -22,6 +25,12 @@ const AddEditNotes = ({ onClose }) => {
     setError(null);
     // Aquí puedes agregar lógica para guardar la nota.
     console.log({ title, content, tags });
+
+    if (type === "edit") {
+      editNote();
+    } else {
+      addNewNote();
+    }
   };
 
   return (
@@ -58,7 +67,10 @@ const AddEditNotes = ({ onClose }) => {
 
       {error && <p className="text-red-500 text-xs pt-4">{error}</p>}
 
-      <button className="btn-primary font-medium mt-5 p-3" onClick={handleAddNote}>
+      <button
+        className="btn-primary font-medium mt-5 p-3"
+        onClick={handleAddNote}
+      >
         Agregar nota
       </button>
     </div>
