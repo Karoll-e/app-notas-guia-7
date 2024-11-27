@@ -27,8 +27,8 @@ const NoteCard = ({
       <div className="flex items-center justify-between mt-2">
         <div className="text-xs text-slate-500">{tags}</div>
         <div className="flex items-center gap-3">
-          <Pencil className="icon-btn hover:text-green-600" onClick={onEdit} />
-          <Trash2 className="icon-btn hover:text-red-500" onClick={onDelete} />
+          <Pencil className="w-4 h-4 icon-btn hover:text-green-600" onClick={onEdit} />
+          <Trash2 className="w-4 h-4 icon-btn hover:text-red-500" onClick={onDelete} />
         </div>
       </div>
     </div>
