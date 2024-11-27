@@ -12,41 +12,58 @@ function Home() {
     data: null,
   });
 
+  const notes = [
+    {
+      title: "Meeting on Monday",
+      date: "Dec 02, 2024",
+      content: "lorem",
+      tags: "#job",
+      isPinned: true,
+    },
+    {
+      title: "Grocery shopping",
+      date: "Dec 03, 2024",
+      content: "Buy milk, bread, and eggs.",
+      tags: "#personal",
+      isPinned: false,
+    },
+    {
+      title: "Workout Plan",
+      date: "Dec 04, 2024",
+      content: "Run 5km and yoga session.",
+      tags: "#fitness",
+      isPinned: false,
+    },
+  ];
+
   return (
     <>
       <NavBar />
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto px-24">
         <div className="grid grid-cols-3 gap-4 mt-8">
-          <NoteCard
-            title="Meeting on Monday"
-            date="Dec 02, 2024"
-            content="lorem"
-            tags="#job"
-            isPinned={true}
-            onEdit={() => {}}
-            onDelete={() => {}}
-            onPinNote={() => {}}
-          />
-          <NoteCard
-            title="Meeting on Monday"
-            date="Dec 02, 2024"
-            content="lorem"
-            tags="#job"
-            isPinned={true}
-            onEdit={() => {}}
-            onDelete={() => {}}
-            onPinNote={() => {}}
-          />
-          <NoteCard
-            title="Meeting on Monday"
-            date="Dec 02, 2024"
-            content="lorem"
-            tags="#job"
-            isPinned={true}
-            onEdit={() => {}}
-            onDelete={() => {}}
-            onPinNote={() => {}}
-          />
+          {notes.map((note, index) => (
+            <NoteCard
+              key={index}
+              title={note.title}
+              date={note.date}
+              content={note.content}
+              tags={note.tags}
+              isPinned={note.isPinned}
+              onEdit={() => {
+                setOpenAddEditModal({
+                  isShown: true,
+                  type: "edit",
+                  data: note,
+                });
+              }}
+              onDelete={() => {
+                console.log("Delete note:", note.title);
+              }}
+              onPinNote={() => {
+                console.log("Pin note:", note.title);
+              }}
+            />
+          ))}
         </div>
       </div>
 
@@ -61,16 +78,22 @@ function Home() {
 
       <Modal
         isOpen={openAddEditModal.isShown}
-        onRequestClose={() => {}}
+        onRequestClose={() => {
+          setOpenAddEditModal({ isShown: false, type: "add", data: null });
+        }}
         style={{
           overlay: {
             backgroundColor: "rgba(0,0,0,0.2)",
           },
         }}
-        contentLabel=""
+        contentLabel="Agregar o editar nota"
         className="w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5 overflow-auto"
       >
-        <AddEditNotes />
+        <AddEditNotes
+          onClose={() => {
+            setOpenAddEditModal({ isShown: false, type: "add", data: null });
+          }}
+        />
       </Modal>
     </>
   );
